@@ -12,12 +12,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -87,13 +85,11 @@ public class ApiV1PostController {
     @Transactional
     public RsData<PostWithContentDto> write(
             @RequestBody @Valid PostWriteReqBody reqBody,
-            Principal principal
+            @AuthenticationPrincipal UserDetails user
     ) {
         Member actor = rq.checkAuthentication();
 
-        if (principal != null) {
-            Authentication authentication = (Authentication) principal;
-            UserDetails user = (UserDetails) authentication.getPrincipal();
+        if (user != null) {
             actor = rq.getActorByUsername(user.getUsername());
         }
 
