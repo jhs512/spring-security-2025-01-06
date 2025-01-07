@@ -178,11 +178,9 @@ public class ApiV1PostControllerTest {
                 .andDo(print());
 
         resultActions
-                .andExpect(handler().handlerType(ApiV1PostController.class))
-                .andExpect(handler().methodName("write"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.resultCode").value("401-1"))
-                .andExpect(jsonPath("$.msg").value("apiKey를 입력해주세요."));
+                .andExpect(jsonPath("$.msg").value("사용자 인증정보가 올바르지 않습니다."));
     }
 
     @Test
@@ -281,11 +279,9 @@ public class ApiV1PostControllerTest {
                 .andDo(print());
 
         resultActions
-                .andExpect(handler().handlerType(ApiV1PostController.class))
-                .andExpect(handler().methodName("modify"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.resultCode").value("401-1"))
-                .andExpect(jsonPath("$.msg").value("apiKey를 입력해주세요."));
+                .andExpect(jsonPath("$.msg").value("사용자 인증정보가 올바르지 않습니다."));
     }
 
     @Test
@@ -369,11 +365,9 @@ public class ApiV1PostControllerTest {
                 .andDo(print());
 
         resultActions
-                .andExpect(handler().handlerType(ApiV1PostController.class))
-                .andExpect(handler().methodName("delete"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.resultCode").value("401-1"))
-                .andExpect(jsonPath("$.msg").value("apiKey를 입력해주세요."));
+                .andExpect(jsonPath("$.msg").value("사용자 인증정보가 올바르지 않습니다."));
     }
 
     @Test
@@ -437,7 +431,7 @@ public class ApiV1PostControllerTest {
                 .andExpect(handler().methodName("item"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.resultCode").value("401-1"))
-                .andExpect(jsonPath("$.msg").value("apiKey를 입력해주세요."));
+                .andExpect(jsonPath("$.msg").value("로그인이 필요합니다."));
     }
 
     @Test
